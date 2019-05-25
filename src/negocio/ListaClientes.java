@@ -19,7 +19,17 @@ public class ListaClientes {
     }
     
     public boolean agregar(Cliente c){
-        return true;
+        
+        try{
+            lista.add(c);
+            return true;
+        }catch(Exception e)
+        {
+            return false;
+        }
+        
+        
+        
     }
 
     public Cliente buscar(int id){
