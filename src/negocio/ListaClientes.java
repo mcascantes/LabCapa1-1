@@ -17,6 +17,10 @@ public class ListaClientes {
     public ListaClientes() {
         lista = new ArrayList<Cliente>();
     }
+     public ArrayList getLista()
+     {
+        return lista;
+     }
     
     public boolean agregar(Cliente c){
         
@@ -28,19 +32,48 @@ public class ListaClientes {
             return false;
         }
         
-        
-        
     }
 
     public Cliente buscar(int id){
+        int _id=0;
+        
+        for (Cliente cliente : lista) {
+            _id=cliente.getId();
+            if(_id==id)
+            {
+                return cliente;
+            }
+        }
         return null;
     }
     
     public boolean modificar(Cliente c){
-        return true;
+        
+        int index=lista.indexOf(c);
+        
+        if(index != -1)        
+        {
+            lista.set(index, c);
+            return true;
+        }else{
+            return false;
+        }
+        
+        
     }
     
     public boolean eliminar(int id){
-        return true;
+        int _id=0; 
+        
+        for (Cliente cliente : lista) {
+            _id=cliente.getId();
+            if(_id==id)
+            {               
+                return lista.remove(cliente);               
+            }
+            
+        }
+        
+        return false;
     }
 }

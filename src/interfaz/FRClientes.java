@@ -12,6 +12,8 @@ package interfaz;
 
 import enumerados.FormaPago;
 import javax.swing.DefaultComboBoxModel;
+import negocio.Cargador;
+import negocio.ListaClientes;
 import negocio.UICliente;
 
 /**
@@ -21,11 +23,14 @@ import negocio.UICliente;
 public class FRClientes extends javax.swing.JFrame {
 
     private UICliente ui;
+    private ListaClientes L;
+    
     
     /** Creates new form FRClientes */
     public FRClientes() {
         initComponents();
         ui = new UICliente();
+        L=new ListaClientes();
     }
 
     /** This method is called from within the constructor to
@@ -95,6 +100,11 @@ public class FRClientes extends javax.swing.JFrame {
         jLabel7.setText("Forma de Pago");
 
         ChkEmpresa.setText("Empresa");
+        ChkEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ChkEmpresaMouseClicked(evt);
+            }
+        });
 
         ComboFP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -239,9 +249,26 @@ public class FRClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         DefaultComboBoxModel cbm=new DefaultComboBoxModel(FormaPago.values());
-        ComboFP.setModel(cbm);
-        
+        ComboFP.setModel(cbm);        
+        Cargador.CargaTabla(L, TblClientes);        
+        TxtContacto.setEnabled(false);
+        TxtExt.setEnabled(false);
+        ComboFP.setEnabled(false);
     }//GEN-LAST:event_formWindowActivated
+
+    private void ChkEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChkEmpresaMouseClicked
+        // TODO add your handling code here:
+        if(ChkEmpresa.isSelected())
+        {
+          TxtContacto.setEnabled(true);
+          TxtExt.setEnabled(true);
+          ComboFP.setEnabled(true);
+       }else{
+            TxtContacto.setEnabled(false); 
+            TxtExt.setEnabled(false);
+            ComboFP.setEnabled(true);
+        }
+    }//GEN-LAST:event_ChkEmpresaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -303,3 +330,5 @@ public class FRClientes extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
+
+
