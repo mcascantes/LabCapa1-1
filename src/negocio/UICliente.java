@@ -6,6 +6,7 @@ package negocio;
 
 import enumerados.FormaPago;
 import interfaz.FRClientes;
+import java.util.ArrayList;
 
 /**
  *
@@ -27,7 +28,11 @@ public class UICliente {
         String correo=ventana.TxtCorreo.getText();
         String telefono=ventana.TxtTelefono.getText();
         String contacto=ventana.TxtContacto.getText();
-        int ext=Integer.parseInt(ventana.TxtExt.getText());
+        int ext=0;
+        if(esEmpresa)
+        {
+            ext=Integer.parseInt(ventana.TxtExt.getText());
+        }
         FormaPago formaPago=(FormaPago)ventana.ComboFP.getSelectedItem();       
                
         boolean resultado =adm.agregar(esEmpresa,codigo, nombre, correo, telefono, contacto, ext,formaPago);
@@ -35,6 +40,10 @@ public class UICliente {
         
         
         
+    }
+    public ArrayList Listar(){
+        
+        return adm.Listar();
     }
     public void buscar(FRClientes ventana){}
     public void modificar(FRClientes ventana){}

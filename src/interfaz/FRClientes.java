@@ -23,14 +23,14 @@ import negocio.UICliente;
 public class FRClientes extends javax.swing.JFrame {
 
     private UICliente ui;
-    private ListaClientes L;
+    
     
     
     /** Creates new form FRClientes */
     public FRClientes() {
         initComponents();
         ui = new UICliente();
-        L=new ListaClientes();
+        
     }
 
     /** This method is called from within the constructor to
@@ -241,6 +241,7 @@ public class FRClientes extends javax.swing.JFrame {
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         // uiTODO add your handling code here:
         ui.agregar(this);
+        Cargador.CargaTabla(ui.Listar(), TblClientes);
         
        
     }//GEN-LAST:event_BtnAgregarActionPerformed
@@ -250,7 +251,7 @@ public class FRClientes extends javax.swing.JFrame {
         
         DefaultComboBoxModel cbm=new DefaultComboBoxModel(FormaPago.values());
         ComboFP.setModel(cbm);        
-        Cargador.CargaTabla(L, TblClientes);        
+        Cargador.CargaTabla(ui.Listar(), TblClientes);        
         TxtContacto.setEnabled(false);
         TxtExt.setEnabled(false);
         ComboFP.setEnabled(false);

@@ -7,6 +7,7 @@ package negocio;
 import datos.Cliente;
 import datos.Empresa;
 import enumerados.FormaPago;
+import java.util.ArrayList;
 
 /**
  *
@@ -45,6 +46,11 @@ public class AdmCliente {
         
         
         
+    }
+    
+    public ArrayList Listar(){
+        return lClientes.getLista();
+    
     }
 
     public boolean agregar ( int id, String n, String c, String t, 
