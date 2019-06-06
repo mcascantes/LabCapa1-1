@@ -49,16 +49,19 @@ public class ListaClientes {
     
     public boolean modificar(Cliente c){
         
-        int index=lista.indexOf(c);
+        int index=0;
         
-        if(index != -1)        
-        {
-            lista.set(index, c);
-            return true;
-        }else{
-            return false;
+         for (Cliente cliente : lista) {
+           
+            if(c.getId()==cliente.getId())
+            {               
+                lista.set(index, c);
+                return true;
+            }
+            index++;
+            
         }
-        
+         return false;   
         
     }
     

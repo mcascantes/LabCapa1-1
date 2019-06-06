@@ -12,7 +12,7 @@ package interfaz;
 
 import enumerados.FormaPago;
 import javax.swing.DefaultComboBoxModel;
-import negocio.Cargador;
+import negocio.Utilitarios;
 import negocio.ListaClientes;
 import negocio.UICliente;
 
@@ -43,25 +43,26 @@ public class FRClientes extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        ChkEmpresa = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         TxtCodigo = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         TxtNombre = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         TxtCorreo = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
         TxtTelefono = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         TxtContacto = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        TxtExt = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        ComboFP = new javax.swing.JComboBox();
         BtnAgregar = new javax.swing.JButton();
         BtnBuscar = new javax.swing.JButton();
         BtnModificar = new javax.swing.JButton();
         BtnEliminar = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        TxtExt = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        ChkEmpresa = new javax.swing.JCheckBox();
-        ComboFP = new javax.swing.JComboBox();
+        BtnLimpiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TblClientes = new javax.swing.JTable();
 
@@ -69,6 +70,13 @@ public class FRClientes extends javax.swing.JFrame {
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+        });
+
+        ChkEmpresa.setText("Empresa");
+        ChkEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ChkEmpresaMouseClicked(evt);
             }
         });
 
@@ -82,6 +90,12 @@ public class FRClientes extends javax.swing.JFrame {
 
         jLabel5.setText("Contacto");
 
+        jLabel6.setText("Ext");
+
+        jLabel7.setText("Forma de Pago");
+
+        ComboFP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         BtnAgregar.setText("Agregar");
         BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,23 +104,32 @@ public class FRClientes extends javax.swing.JFrame {
         });
 
         BtnBuscar.setText("Buscar");
-
-        BtnModificar.setText("Modificar");
-
-        BtnEliminar.setText("Eliminar");
-
-        jLabel6.setText("Ext");
-
-        jLabel7.setText("Forma de Pago");
-
-        ChkEmpresa.setText("Empresa");
-        ChkEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ChkEmpresaMouseClicked(evt);
+        BtnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBuscarActionPerformed(evt);
             }
         });
 
-        ComboFP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BtnModificar.setText("Modificar");
+        BtnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnModificarActionPerformed(evt);
+            }
+        });
+
+        BtnEliminar.setText("Eliminar");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
+
+        BtnLimpiar.setText("Limpiar");
+        BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnLimpiarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -135,6 +158,8 @@ public class FRClientes extends javax.swing.JFrame {
                             .addComponent(TxtContacto, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnLimpiar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(BtnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -162,7 +187,8 @@ public class FRClientes extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TxtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnAgregar))
+                    .addComponent(BtnAgregar)
+                    .addComponent(BtnLimpiar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -240,36 +266,64 @@ public class FRClientes extends javax.swing.JFrame {
 
     private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         // uiTODO add your handling code here:
-        ui.agregar(this);
-        Cargador.CargaTabla(ui.Listar(), TblClientes);
+        ui.agregar(this);        
+        Utilitarios.CargaTabla(ui.Listar(), TblClientes);
         
        
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        // TODO add your handling code here:
         
+        //Estableca las opciones por defecto al cargar la pantalla
         DefaultComboBoxModel cbm=new DefaultComboBoxModel(FormaPago.values());
         ComboFP.setModel(cbm);        
-        Cargador.CargaTabla(ui.Listar(), TblClientes);        
+        Utilitarios.CargaTabla(ui.Listar(), TblClientes);        
         TxtContacto.setEnabled(false);
         TxtExt.setEnabled(false);
         ComboFP.setEnabled(false);
     }//GEN-LAST:event_formWindowActivated
 
     private void ChkEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ChkEmpresaMouseClicked
-        // TODO add your handling code here:
-        if(ChkEmpresa.isSelected())
+        
+        if(ChkEmpresa.isSelected())//Verifica si Es una empresa
         {
+                                        //Se habilitan los componentes
           TxtContacto.setEnabled(true);
           TxtExt.setEnabled(true);
           ComboFP.setEnabled(true);
        }else{
+                                     //Sino los Deshabilita
             TxtContacto.setEnabled(false); 
             TxtExt.setEnabled(false);
             ComboFP.setEnabled(true);
         }
     }//GEN-LAST:event_ChkEmpresaMouseClicked
+
+    private void BtnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBuscarActionPerformed
+        
+        ui.buscar(this);//Llamada al Metodo Buscar del Archivo UIClientes
+        
+    }//GEN-LAST:event_BtnBuscarActionPerformed
+
+    private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
+       
+        ui.modificar(this);//Llamada al metodo modificar y envia el formulario como parametro
+        ui.Limpiar(this);//Borra la Info de las cajas de texto
+        Utilitarios.CargaTabla(ui.Listar(), TblClientes);//Llama al Utilitario que carga la Tabla con Datos
+    }//GEN-LAST:event_BtnModificarActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        
+        ui.eliminar(this);//Llama al Metodo de UIClientes Eliminar
+        ui.Limpiar(this);//Borra la Info de las cajas de texto
+        Utilitarios.CargaTabla(ui.Listar(), TblClientes); //Llama al Utilitario que carga la Tabla con Datos  para Cargar los cambios
+        
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void BtnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLimpiarActionPerformed
+  
+     ui.Limpiar(this);  //Borra la Info de las cajas de texto
+    }//GEN-LAST:event_BtnLimpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,6 +364,7 @@ public class FRClientes extends javax.swing.JFrame {
     public javax.swing.JButton BtnAgregar;
     public javax.swing.JButton BtnBuscar;
     public javax.swing.JButton BtnEliminar;
+    private javax.swing.JButton BtnLimpiar;
     public javax.swing.JButton BtnModificar;
     public javax.swing.JCheckBox ChkEmpresa;
     public javax.swing.JComboBox ComboFP;

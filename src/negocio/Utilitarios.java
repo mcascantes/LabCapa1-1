@@ -8,6 +8,8 @@ package negocio;
 import datos.Cliente;
 import datos.Empresa;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,11 +17,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author laboratorio
  */
-public class Cargador {
+public class Utilitarios {
     
     
     
-    public static void CargaTabla(ArrayList lista,JTable tabla){
+    public static void CargaTabla(ArrayList lista,JTable tabla){//Metodo que carga la tabla del formulario
     
         
         DefaultTableModel dtm=(DefaultTableModel)tabla.getModel();//Creamos un Modelo para los datois
@@ -37,8 +39,36 @@ public class Cargador {
              dtm.addRow(fila);
         }
          
-         tabla.setModel(dtm);
-        
+         tabla.setModel(dtm);        
         
     }
+    
+    public static boolean esNumero(String cadena){ //Verifica si una cadena de texto es numerica o no
+    	try {
+    		Integer.parseInt(cadena);
+    		return true;
+    	} catch (NumberFormatException nfe){
+    		return false;
+    	}
+    }   
+    
+    
+    
+    public static boolean esEmailCorrecto(String email) {//Verifica que el correo esté bien escrito y en formato correcto
+       
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        
+        return matcher.matches();
+    }
+    
+    public static boolean existeCliente(AdmCliente adm,int id)//Verifica en la Lista si un Cliente Existe para no ingresarlo 2 veces
+    {              
+       Cliente C=adm.buscar(id);
+       return C!=null && C.getId()==id;
+        
+    }
+    
+    
 }
